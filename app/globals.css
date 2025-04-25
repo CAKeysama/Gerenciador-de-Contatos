@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-color: #4f46e5;
+  --primary-color-light: #6366f1;
+  --primary-color-dark: #4338ca;
+  --primary-rgb: 79, 70, 229; /* Valor padrão para indigo-600 */
+
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 245, 245, 245;
+  --background-end-rgb: 255, 255, 255;
+
+  --card-background: 255, 255, 255;
+  --card-foreground: 0, 0, 0;
+
+  --sidebar-background: 255, 255, 255;
+  --sidebar-foreground: 0, 0, 0;
+  --sidebar-border: 229, 231, 235;
+
+  --input-background: 255, 255, 255;
+  --input-border: 209, 213, 219;
+  --input-foreground: 0, 0, 0;
+}
+
+.dark {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 17, 24, 39;
+  --background-end-rgb: 31, 41, 55;
+
+  --card-background: 31, 41, 55;
+  --card-foreground: 255, 255, 255;
+
+  --sidebar-background: 31, 41, 55;
+  --sidebar-foreground: 255, 255, 255;
+  --sidebar-border: 55, 65, 81;
+
+  --input-background: 55, 65, 81;
+  --input-border: 75, 85, 99;
+  --input-foreground: 255, 255, 255;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(to bottom, rgb(var(--background-start-rgb)), rgb(var(--background-end-rgb)));
+}
+
+/* Classes personalizadas para usar a cor primária */
+.bg-primary {
+  background-color: var(--primary-color);
+}
+
+.text-primary {
+  color: var(--primary-color);
+}
+
+.dark .text-primary {
+  color: var(--primary-color-light);
+}
+
+.text-primary-light {
+  color: var(--primary-color-light);
+}
+
+.border-primary {
+  border-color: var(--primary-color);
+}
+
+.hover\:bg-primary:hover {
+  background-color: var(--primary-color);
+}
+
+.hover\:text-primary:hover {
+  color: var(--primary-color);
+}
+
+.hover\:border-primary:hover {
+  border-color: var(--primary-color);
+}
+
+.focus\:ring-primary:focus {
+  --tw-ring-color: var(--primary-color);
+}
+
+/* Variações da cor primária */
+.bg-primary-light {
+  background-color: var(--primary-color-light);
+}
+
+.bg-primary-dark {
+  background-color: var(--primary-color-dark);
+}
+
+/* Estilos para cartões no modo escuro */
+.dark .bg-white {
+  background-color: rgb(var(--card-background));
+  color: rgb(var(--card-foreground));
+}
+
+.dark .border-gray-200 {
+  border-color: rgb(var(--sidebar-border));
+}
+
+.dark .text-gray-700 {
+  color: rgb(229, 231, 235);
+}
+
+.dark .text-gray-500 {
+  color: rgb(156, 163, 175);
+}
+
+.dark .text-gray-900 {
+  color: rgb(243, 244, 246);
+}
+
+/* Estilos para inputs no modo escuro */
+.dark input,
+.dark select,
+.dark textarea {
+  background-color: rgb(var(--input-background));
+  border-color: rgb(var(--input-border));
+  color: rgb(var(--input-foreground));
+}
+
+/* Estilos para botões no modo escuro */
+.dark .bg-gray-50 {
+  background-color: rgb(55, 65, 81);
+}
+
+.dark .hover\:bg-gray-50:hover {
+  background-color: rgb(75, 85, 99);
+}
+
+/* Estilos para tabelas no modo escuro */
+.dark .bg-white.divide-y.divide-gray-200 {
+  background-color: rgb(var(--card-background));
+  color: rgb(var(--card-foreground));
+  --tw-divide-opacity: 1;
+  border-color: rgba(55, 65, 81, var(--tw-divide-opacity));
+}
+
+.dark tbody.bg-white {
+  background-color: rgb(var(--card-background));
+  color: rgb(var(--card-foreground));
+}
+
+.dark tr.hover\:bg-gray-50:hover {
+  background-color: rgb(55, 65, 81);
+}
+
+.dark .divide-gray-200 {
+  --tw-divide-opacity: 1;
+  border-color: rgba(55, 65, 81, var(--tw-divide-opacity));
+}
+
+.dark .divide-gray-300 {
+  --tw-divide-opacity: 1;
+  border-color: rgba(75, 85, 99, var(--tw-divide-opacity));
+}
