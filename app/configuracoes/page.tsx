@@ -33,7 +33,7 @@ export default function Settings() {
     currentPassword: "",
     newPassword: "",
     confirmPassword: "",
-    avatar: "/avatar-placeholder.png",
+    avatar: "/avatar-default.png",
   })
 
   // Configurações de notificações
@@ -154,11 +154,11 @@ export default function Settings() {
                   onClick={handleAvatarClick}
                 >
                   <img
-                    src={profileSettings.avatar || "/avatar-placeholder.png"}
+                    src={profileSettings.avatar || "/avatar-default.png"}
                     alt="Avatar"
                     className="h-full w-full object-cover"
                     onError={(e) => {
-                      e.currentTarget.src = "/avatar-placeholder.png"
+                      e.currentTarget.src = "/avatar-default.png"
                     }}
                   />
                   <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40 opacity-0 transition-opacity hover:opacity-100">
@@ -341,21 +341,29 @@ export default function Settings() {
                   <label htmlFor="customColor" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                     Cor personalizada
                   </label>
-                  <div className="mt-1 flex items-center space-x-2">
-                    <input
-                      type="color"
-                      id="customColor"
-                      value={primaryColor}
-                      onChange={(e) => setPrimaryColor(e.target.value)}
-                      className="h-10 w-10 rounded-md border-gray-300 p-0"
-                    />
-                    <input
-                      type="text"
-                      value={primaryColor}
-                      onChange={(e) => setPrimaryColor(e.target.value)}
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white"
-                      placeholder="#RRGGBB"
-                    />
+                  <div className="mt-1 flex items-center space-x-3">
+                    <div className="relative">
+                      <input
+                        type="color"
+                        id="customColor"
+                        value={primaryColor}
+                        onChange={(e) => setPrimaryColor(e.target.value)}
+                        className="h-12 w-12 cursor-pointer rounded-md border-2 border-gray-300 p-0 dark:border-gray-600"
+                      />
+                      <div
+                        className="absolute inset-0 rounded-md pointer-events-none"
+                        style={{ boxShadow: "inset 0 0 0 1px rgba(0,0,0,0.1)" }}
+                      ></div>
+                    </div>
+                    <div className="flex-1">
+                      <input
+                        type="text"
+                        value={primaryColor}
+                        onChange={(e) => setPrimaryColor(e.target.value)}
+                        className="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                        placeholder="#RRGGBB"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -543,8 +551,8 @@ export default function Settings() {
                   ))}
                 </div>
 
-                <div className="flex items-end space-x-2">
-                  <div className="flex-1">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-12">
+                  <div className="sm:col-span-7">
                     <label
                       htmlFor="newCategoryName"
                       className="block text-sm font-medium text-gray-700 dark:text-gray-300"
@@ -560,28 +568,32 @@ export default function Settings() {
                       placeholder="Nome da categoria"
                     />
                   </div>
-                  <div>
+                  <div className="sm:col-span-2">
                     <label
                       htmlFor="newCategoryColor"
                       className="block text-sm font-medium text-gray-700 dark:text-gray-300"
                     >
                       Cor
                     </label>
-                    <input
-                      type="color"
-                      id="newCategoryColor"
-                      value={newCategory.color}
-                      onChange={(e) => setNewCategory({ ...newCategory, color: e.target.value })}
-                      className="mt-1 h-10 w-10 rounded-md border-gray-300 p-0"
-                    />
+                    <div className="mt-1">
+                      <input
+                        type="color"
+                        id="newCategoryColor"
+                        value={newCategory.color}
+                        onChange={(e) => setNewCategory({ ...newCategory, color: e.target.value })}
+                        className="h-12 w-12 cursor-pointer rounded-md border-2 border-gray-300 p-0 dark:border-gray-600"
+                      />
+                    </div>
                   </div>
-                  <button
-                    type="button"
-                    onClick={handleAddCategory}
-                    className="rounded-md border border-transparent bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                  >
-                    Adicionar
-                  </button>
+                  <div className="flex items-end sm:col-span-3">
+                    <button
+                      type="button"
+                      onClick={handleAddCategory}
+                      className="h-12 w-full rounded-md border border-transparent bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                    >
+                      Adicionar
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

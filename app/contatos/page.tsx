@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import { Edit, Plus, Search, Trash2, Eye } from "lucide-react"
+import { Edit, Plus, Search, Trash2, Eye, ChevronLeft, ChevronRight } from "lucide-react"
 import MainLayout from "@/components/layout/main-layout"
 import ContactDetailModal from "@/components/contacts/contact-detail-modal"
 
@@ -70,6 +70,20 @@ export default function ContactsList() {
   const currentItems = filteredContacts.slice(indexOfFirstItem, indexOfLastItem)
   const totalPages = Math.ceil(filteredContacts.length / itemsPerPage)
 
+  // Função para gerar array de páginas a exibir
+  const getPageNumbers = () => {
+    const maxPagesToShow = 5
+    let startPage = Math.max(1, currentPage - Math.floor(maxPagesToShow / 2))
+    let endPage = startPage + maxPagesToShow - 1
+
+    if (endPage > totalPages) {
+      endPage = totalPages
+      startPage = Math.max(1, endPage - maxPagesToShow + 1)
+    }
+
+    return Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i)
+  }
+
   // Categorias únicas para o filtro
   const categories = ["Cliente", "Fornecedor", "Parceiro", "Prospect"]
 
@@ -96,7 +110,7 @@ export default function ContactsList() {
     <MainLayout>
       <div className="space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-          <h1 className="text-2xl font-bold text-gray-900">Contatos</h1>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Contatos</h1>
           <Link
             href="/contatos/novo"
             className="mt-3 inline-flex items-center rounded-md border border-transparent bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:mt-0"
@@ -113,13 +127,13 @@ export default function ContactsList() {
               Pesquisar
             </label>
             <div className="relative">
-              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
                 <Search className="h-5 w-5 text-gray-400" />
               </div>
               <input
-                type="text"
+                type="search"
                 id="search"
-                className="block w-full rounded-md border-gray-300 pl-10 focus:border-primary focus:ring-primary sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                className="block w-full rounded-md border-gray-300 pl-12 pr-4 py-3 focus:border-primary focus:ring-primary sm:text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white"
                 placeholder="Pesquisar contatos..."
                 value={searchTerm}
                 onChange={(e) => {
@@ -207,10 +221,10 @@ export default function ContactsList() {
                         <div className="h-10 w-10 flex-shrink-0">
                           <img
                             className="h-10 w-10 rounded-full object-cover"
-                            src={contact.avatar || "/avatar-placeholder.png"}
+                            src={contact.avatar || "/avatar-default.png"}
                             alt=""
                             onError={(e) => {
-                              e.currentTarget.src = "/avatar-placeholder.png"
+                              e.currentTarget.src = "/avatar-default.png"
                             }}
                           />
                         </div>
@@ -286,31 +300,30 @@ export default function ContactsList() {
                   <button
                     onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                     disabled={currentPage === 1}
-                    className="relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700"
+                    className="pagination-arrow rounded-l-md"
+                    aria-label="Página anterior"
                   >
-                    <span className="sr-only">Anterior</span>
-                    &larr;
+                    <ChevronLeft className="h-5 w-5" />
                   </button>
-                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+
+                  {getPageNumbers().map((page) => (
                     <button
                       key={page}
                       onClick={() => setCurrentPage(page)}
-                      className={`relative inline-flex items-center border px-4 py-2 text-sm font-medium ${
-                        page === currentPage
-                          ? "z-10 border-primary bg-primary bg-opacity-10 text-primary dark:text-primary-light"
-                          : "border-gray-300 bg-white text-gray-500 hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700"
-                      }`}
+                      className={`pagination-item ${page === currentPage ? "active" : ""}`}
+                      aria-current={page === currentPage ? "page" : undefined}
                     >
                       {page}
                     </button>
                   ))}
+
                   <button
                     onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
                     disabled={currentPage === totalPages}
-                    className="relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700"
+                    className="pagination-arrow rounded-r-md"
+                    aria-label="Próxima página"
                   >
-                    <span className="sr-only">Próximo</span>
-                    &rarr;
+                    <ChevronRight className="h-5 w-5" />
                   </button>
                 </nav>
               </div>

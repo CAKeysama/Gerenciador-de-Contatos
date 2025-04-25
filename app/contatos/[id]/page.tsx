@@ -144,11 +144,11 @@ export default function ContactForm() {
           <div className="mt-4 flex justify-center sm:justify-start">
             <div className="h-24 w-24 overflow-hidden rounded-full">
               <img
-                src={formData.avatar || "/avatar-placeholder.png"}
+                src={formData.avatar || "/avatar-default.png"}
                 alt="Avatar do contato"
                 className="h-full w-full object-cover"
                 onError={(e) => {
-                  e.currentTarget.src = "/avatar-placeholder.png"
+                  e.currentTarget.src = "/avatar-default.png"
                 }}
               />
             </div>

@@ -158,3 +158,321 @@ body {
   --tw-divide-opacity: 1;
   border-color: rgba(75, 85, 99, var(--tw-divide-opacity));
 }
+
+/* Melhorias de UI - Inputs e campos de pesquisa */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+select,
+textarea {
+  padding: 0.75rem 1rem;
+  height: 3rem;
+  width: 100%;
+  border-radius: 0.375rem;
+  border-width: 1px;
+  border-color: rgb(209, 213, 219);
+  background-color: #ffffff;
+  color: rgb(17, 24, 39);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.dark input[type="text"],
+.dark input[type="email"],
+.dark input[type="password"],
+.dark input[type="search"],
+.dark select,
+.dark textarea {
+  background-color: rgb(55, 65, 81);
+  border-color: rgb(75, 85, 99);
+  color: #ffffff;
+}
+
+input[type="color"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+  border-radius: 0.25rem;
+}
+
+input[type="color"]::-moz-color-swatch {
+  border: none;
+  border-radius: 0.25rem;
+}
+
+/* Foco em inputs */
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.2);
+}
+
+/* Estilização personalizada para checkboxes */
+input[type="checkbox"] {
+  height: 1.25rem;
+  width: 1.25rem;
+  border-radius: 0.25rem;
+  border-color: rgb(209, 213, 219);
+  color: var(--primary-color);
+  cursor: pointer;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+.dark input[type="checkbox"] {
+  border-color: rgb(75, 85, 99);
+  background-color: rgb(55, 65, 81);
+}
+
+/* Estilização para o label do checkbox */
+.checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+.checkbox-label:hover {
+  background-color: rgb(249, 250, 251);
+}
+
+.dark .checkbox-label:hover {
+  background-color: rgb(55, 65, 81);
+}
+
+/* Estilização para dropdowns */
+select {
+  appearance: none;
+  background-color: #ffffff;
+  border: 1px solid rgb(209, 213, 219);
+  border-radius: 0.375rem;
+  padding: 0.75rem 1rem;
+  padding-right: 2.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.75rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+}
+
+.dark select {
+  background-color: rgb(55, 65, 81);
+  border-color: rgb(75, 85, 99);
+  color: #ffffff;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23d1d5db' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+}
+
+/* Estilização para paginação */
+.pagination-item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  border-width: 1px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+.pagination-item.active {
+  z-index: 10;
+  border-color: var(--primary-color);
+  background-color: var(--primary-color);
+  background-opacity: 0.1;
+  color: var(--primary-color);
+}
+
+.dark .pagination-item.active {
+  color: var(--primary-color-light);
+}
+
+.pagination-item:not(.active) {
+  border-color: rgb(209, 213, 219);
+  background-color: #ffffff;
+  color: rgb(107, 114, 128);
+}
+
+.pagination-item:not(.active):hover {
+  background-color: rgb(249, 250, 251);
+}
+
+.dark .pagination-item:not(.active) {
+  border-color: rgb(75, 85, 99);
+  background-color: rgb(31, 41, 55);
+  color: rgb(156, 163, 175);
+}
+
+.dark .pagination-item:not(.active):hover {
+  background-color: rgb(55, 65, 81);
+}
+
+.pagination-arrow {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  border-width: 1px;
+  border-color: rgb(209, 213, 219);
+  background-color: #ffffff;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  color: rgb(107, 114, 128);
+}
+
+.pagination-arrow:hover {
+  background-color: rgb(249, 250, 251);
+}
+
+.dark .pagination-arrow {
+  border-color: rgb(75, 85, 99);
+  background-color: rgb(31, 41, 55);
+  color: rgb(156, 163, 175);
+}
+
+.dark .pagination-arrow:hover {
+  background-color: rgb(55, 65, 81);
+}
+
+/* Estilização para o menu de notificações */
+.notification-dropdown {
+  position: absolute;
+  right: 0;
+  margin-top: 0.5rem;
+  width: 20rem;
+  transform-origin: top right;
+  border-radius: 0.375rem;
+  background-color: #ffffff;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  border-width: 1px;
+  border-color: rgba(0, 0, 0, 0.05);
+}
+
+.dark .notification-dropdown {
+  background-color: rgb(31, 41, 55);
+  border-color: rgb(75, 85, 99);
+}
+
+.notification-item {
+  display: flex;
+  align-items: flex-start;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom-width: 1px;
+  border-color: rgb(243, 244, 246);
+}
+
+.notification-item:last-child {
+  border-bottom-width: 0px;
+}
+
+.notification-item:hover {
+  background-color: rgb(249, 250, 251);
+}
+
+.dark .notification-item {
+  border-color: rgb(55, 65, 81);
+}
+
+.dark .notification-item:hover {
+  background-color: rgb(55, 65, 81);
+}
+
+.notification-icon {
+  flex-shrink: 0;
+  border-radius: 9999px;
+  background-color: var(--primary-color);
+  background-opacity: 0.1;
+  padding: 0.5rem;
+  margin-right: 0.75rem;
+}
+
+.notification-content {
+  flex: 1 1 0%;
+}
+
+.notification-title {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  color: rgb(17, 24, 39);
+}
+
+.dark .notification-title {
+  color: #ffffff;
+}
+
+.notification-message {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: rgb(107, 114, 128);
+}
+
+.dark .notification-message {
+  color: rgb(156, 163, 175);
+}
+
+.notification-time {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: rgb(156, 163, 175);
+  margin-top: 0.25rem;
+}
+
+.dark .notification-time {
+  color: rgb(107, 114, 128);
+}
+
+.notification-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 1rem;
+  width: 1rem;
+  border-radius: 9999px;
+  background-color: rgb(239, 68, 68);
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(50%, -50%);
+}

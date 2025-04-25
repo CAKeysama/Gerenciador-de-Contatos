@@ -66,10 +66,10 @@ export default function ContactDetailModal({ contact, onClose }: ContactDetailMo
               <div className="mx-auto flex h-24 w-24 flex-shrink-0 items-center justify-center rounded-full sm:mx-0 sm:h-32 sm:w-32">
                 <img
                   className="h-full w-full rounded-full object-cover"
-                  src={contact.avatar || "/avatar-placeholder.png"}
+                  src={contact.avatar || "/avatar-default.png"}
                   alt={contact.name}
                   onError={(e) => {
-                    e.currentTarget.src = "/avatar-placeholder.png"
+                    e.currentTarget.src = "/avatar-default.png"
                   }}
                 />
               </div>

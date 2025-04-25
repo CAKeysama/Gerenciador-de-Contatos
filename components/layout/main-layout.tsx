@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useState } from "react"
-import { Bell, ChevronDown, LogOut, Menu, User, X } from "lucide-react"
+import { Bell, ChevronDown, LogOut, Menu, User, X, MessageSquare, Calendar, FileText } from "lucide-react"
 import { useAuth } from "@/components/auth/auth-provider"
 import { useTheme } from "@/components/theme/theme-provider"
 import Sidebar from "./sidebar"
@@ -12,14 +12,64 @@ interface MainLayoutProps {
   children: React.ReactNode
 }
 
+// Dados simulados para notificações
+const mockNotifications = [
+  {
+    id: 1,
+    title: "Novo contato adicionado",
+    message: "João Silva adicionou um novo contato: Maria Oliveira",
+    time: "5 minutos atrás",
+    icon: User,
+    read: false,
+  },
+  {
+    id: 2,
+    title: "Lembrete de reunião",
+    message: "Você tem uma reunião com Carlos Mendes às 15:00",
+    time: "1 hora atrás",
+    icon: Calendar,
+    read: false,
+  },
+  {
+    id: 3,
+    title: "Relatório mensal disponível",
+    message: "O relatório de contatos do mês de Abril está disponível",
+    time: "3 horas atrás",
+    icon: FileText,
+    read: true,
+  },
+  {
+    id: 4,
+    title: "Nova mensagem",
+    message: "Você recebeu uma nova mensagem de Ana Paula",
+    time: "1 dia atrás",
+    icon: MessageSquare,
+    read: true,
+  },
+]
+
 export default function MainLayout({ children }: MainLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [userMenuOpen, setUserMenuOpen] = useState(false)
+  const [notificationsOpen, setNotificationsOpen] = useState(false)
   const { logout } = useAuth()
   const { theme } = useTheme()
 
+  // Estado para notificações
+  const [notifications, setNotifications] = useState(mockNotifications)
+
+  const unreadCount = notifications.filter((n) => !n.read).length
+
   const handleLogout = () => {
     logout()
+  }
+
+  const markAllAsRead = () => {
+    setNotifications(notifications.map((n) => ({ ...n, read: true })))
+  }
+
+  const markAsRead = (id: number) => {
+    setNotifications(notifications.map((n) => (n.id === id ? { ...n, read: true } : n)))
   }
 
   return (
@@ -69,9 +119,65 @@ export default function MainLayout({ children }: MainLayoutProps) {
                 </div>
               </div>
               <div className="flex items-center gap-4">
-                <button className="rounded-full bg-gray-100 p-2 text-gray-500 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600">
-                  <Bell className="h-5 w-5" />
-                </button>
+                <div className="relative">
+                  <button
+                    className="rounded-full bg-gray-100 p-2 text-gray-500 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 relative"
+                    onClick={() => setNotificationsOpen(!notificationsOpen)}
+                  >
+                    <Bell className="h-5 w-5" />
+                    {unreadCount > 0 && <span className="notification-badge">{unreadCount}</span>}
+                  </button>
+
+                  {/* Menu de notificações */}
+                  {notificationsOpen && (
+                    <div className="notification-dropdown">
+                      <div className="flex items-center justify-between px-4 py-2 border-b border-gray-100 dark:border-gray-700">
+                        <h3 className="text-sm font-medium text-gray-900 dark:text-white">Notificações</h3>
+                        <button
+                          onClick={markAllAsRead}
+                          className="text-xs text-primary hover:text-primary-dark dark:text-primary-light"
+                        >
+                          Marcar todas como lidas
+                        </button>
+                      </div>
+
+                      {notifications.length === 0 ? (
+                        <div className="p-4 text-center text-sm text-gray-500 dark:text-gray-400">
+                          Nenhuma notificação
+                        </div>
+                      ) : (
+                        <div className="max-h-80 overflow-y-auto">
+                          {notifications.map((notification) => (
+                            <div
+                              key={notification.id}
+                              className={`notification-item ${!notification.read ? "bg-blue-50 dark:bg-blue-900/20" : ""}`}
+                              onClick={() => markAsRead(notification.id)}
+                            >
+                              <div className="notification-icon">
+                                <notification.icon className="h-5 w-5 text-primary" />
+                              </div>
+                              <div className="notification-content">
+                                <div className="notification-title">{notification.title}</div>
+                                <div className="notification-message">{notification.message}</div>
+                                <div className="notification-time">{notification.time}</div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+
+                      <div className="border-t border-gray-100 dark:border-gray-700 p-2">
+                        <button
+                          className="w-full text-center text-sm text-primary hover:text-primary-dark dark:text-primary-light py-1"
+                          onClick={() => setNotificationsOpen(false)}
+                        >
+                          Ver todas as notificações
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
                 <div className="relative">
                   <div
                     className="flex items-center gap-2 cursor-pointer"
